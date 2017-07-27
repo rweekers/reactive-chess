@@ -14,6 +14,7 @@ public class BoardPrinter {
     }
 
     public void printBoard() {
-        System.out.println(this.service.getBoard());
+        service.initBoard();
+        System.out.println(service.getBoard());
     }
 }
