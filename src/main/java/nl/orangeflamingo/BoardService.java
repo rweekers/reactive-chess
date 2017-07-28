@@ -28,15 +28,25 @@ public class BoardService {
     private List<Piece> whitePieces;
 
     public String getBoard() {
-        return "8|-|-|-|-|-|-|-|-|\n" +
-                "7|-|-|-|-|-|-|-|-|\n" +
-                "6|-|-|-|-|-|-|-|-|\n" +
-                "5|-|-|-|-|-|-|-|-|\n" +
-                "4|-|-|-|-|-|-|-|-|\n" +
-                "3|-|-|-|-|-|-|-|-|\n" +
-                "2|-|-|-|-|-|-|-|-|\n" +
-                "1" + createEmptyBlock(Color.BLACK) + createEmptyBlock(Color.WHITE) + "|-|-|-|-|-|-|-|\n" +
-                " |A||B||C||D||E||F||G||H|";
+        return printBoard();
+    }
+
+    private String printBoard() {
+        Color c = Color.WHITE;
+        int numberOfRows = 8;
+        StringBuilder board = new StringBuilder();
+        while(numberOfRows > 0) {
+            int numberOfColumns = 8;
+            while(numberOfColumns > 0) {
+                board.append(createEmptyBlock(c));
+                c = Color.reverse(c);
+                numberOfColumns--;
+            }
+            c = Color.reverse(c);
+            board.append("\n");
+            numberOfRows--;
+        }
+        return board.toString();
     }
 
     public void initBoard() {

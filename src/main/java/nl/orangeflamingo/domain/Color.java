@@ -14,5 +14,13 @@ public enum Color {
         this.colorString = colorString;
     }
 
-    public String getColorString(){return this.colorString;}
+    public String getColorString() { return this.colorString; }
+
+    public static Color reverse(Color color) {
+        switch (color) {
+            case WHITE: return BLACK;
+            case BLACK: return WHITE;
+        }
+        return WHITE;
+    }
 }
