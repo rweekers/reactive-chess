@@ -5,6 +5,14 @@ package nl.orangeflamingo.domain;
  */
 public enum Color {
 
-    WHITE,
-    BLACK;
+    WHITE("\u001B[33m"),
+    BLACK("\u001B[31m");
+
+    private final String colorString;
+
+    Color(String colorString) {
+        this.colorString = colorString;
+    }
+
+    public String getColorString(){return this.colorString;}
 }
