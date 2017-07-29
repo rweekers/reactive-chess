@@ -33,18 +33,18 @@ public class BoardService {
 
     private String printBoard() {
         Color c = Color.WHITE;
-        int numberOfRows = 8;
+        int rowNumber = 7;
         StringBuilder board = new StringBuilder();
-        while(numberOfRows > 0) {
-            int numberOfColumns = 8;
-            while(numberOfColumns > 0) {
+        while(rowNumber >= 0) {
+            int columnNumber = 0;
+            while(columnNumber <= 8) {
                 board.append(createEmptyBlock(c));
                 c = Color.reverse(c);
-                numberOfColumns--;
+                columnNumber++;
             }
             c = Color.reverse(c);
             board.append("\n");
-            numberOfRows--;
+            rowNumber--;
         }
         return board.toString();
     }
