@@ -13,16 +13,26 @@ public abstract class Piece {
 
     private List<Position> possibleMoves = new ArrayList();
 
-    protected void setPosition(Position position) {
-        this.position = position;
+    protected Color getColor() {
+        return this.color;
     }
 
     protected void setColor(Color color) {
         this.color = color;
     }
 
+    protected Position getPosition() {
+        return this.position;
+    }
+
+    protected void setPosition(Position position) {
+        this.position = position;
+    }
+
     public void setPossibleMoves(List<Position> possibleMoves) {
         this.possibleMoves = possibleMoves;
     }
+
+    public abstract String print();
 
 }

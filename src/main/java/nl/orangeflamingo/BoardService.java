@@ -6,9 +6,6 @@ import nl.orangeflamingo.domain.Piece;
 import nl.orangeflamingo.domain.Position;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.List;
-
 /**
  * Service for printing the chess board
  */
@@ -25,7 +22,7 @@ public class BoardService {
     public static final String ANSI_CYAN = "\u001B[36m";
     public static final String ANSI_WHITE = "\u001B[37m";
 
-    private List<Piece> whitePieces;
+    private Piece[][] board = new Piece[8][8];
 
     public String getBoard() {
         return printBoard();
@@ -34,30 +31,39 @@ public class BoardService {
     private String printBoard() {
         Color c = Color.WHITE;
         int rowNumber = 7;
-        StringBuilder board = new StringBuilder();
-        while(rowNumber >= 0) {
+        StringBuilder printBoard = new StringBuilder();
+        while (rowNumber >= 0) {
             int columnNumber = 0;
-            while(columnNumber <= 8) {
-                board.append(createEmptyBlock(c));
+            while (columnNumber < 8) {
+                if (board[rowNumber][columnNumber] == null) {
+                    printBoard.append(createEmptyBlock(c));
+                } else {
+                    printBoard.append(createPieceBlock(c, board[rowNumber][columnNumber]));
+                }
                 c = Color.reverse(c);
                 columnNumber++;
             }
             c = Color.reverse(c);
-            board.append("\n");
+            printBoard.append("\n");
             rowNumber--;
         }
-        return board.toString();
+        return printBoard.toString();
     }
 
     public void initBoard() {
-        whitePieces = new ArrayList<Piece>();
         for (int i = 0; i < 8; i++) {
-            Pawn p = new Pawn(new Position(i, 1), Color.WHITE);
-            whitePieces.add(p);
+            Pawn whitePawn = new Pawn(new Position(i, 1), Color.WHITE);
+            Pawn blackPawn = new Pawn(new Position(i, 6), Color.BLACK);
+            board[1][i] = whitePawn;
+            board[6][i] = blackPawn;
         }
     }
 
     private String createEmptyBlock(Color color) {
         return color.getColorString() + "|-|" + ANSI_RESET;
+    }
+
+    private String createPieceBlock(Color color, Piece piece) {
+        return color.getColorString() + "|" + ANSI_RESET + piece.print() + color.getColorString() + "|" + ANSI_RESET;
     }
 }
