@@ -1,9 +1,6 @@
 package nl.orangeflamingo;
 
-import nl.orangeflamingo.domain.Color;
-import nl.orangeflamingo.domain.Pawn;
-import nl.orangeflamingo.domain.Piece;
-import nl.orangeflamingo.domain.Position;
+import nl.orangeflamingo.domain.*;
 import org.springframework.stereotype.Service;
 
 /**
@@ -57,6 +54,51 @@ public class BoardService {
             board[1][i] = whitePawn;
             board[6][i] = blackPawn;
         }
+        King whiteKing = new King(new Position(0, 4), Color.WHITE);
+        board[0][4] = whiteKing;
+        King blackKing = new King(new Position(7, 4), Color.BLACK);
+        board[7][4] = blackKing;
+
+        Queen whiteQueen = new Queen(new Position(0, 3), Color.WHITE);
+        board[0][3] = whiteQueen;
+        Queen blackQueen = new Queen(new Position(7, 3), Color.BLACK);
+        board[7][3] = blackQueen;
+        createAndAddRooks();
+        createAndAddKnights();
+        createAndAddBishops();
+    }
+
+    private void createAndAddRooks() {
+        Rook whiteLeft = new Rook(new Position(0,0), Color.WHITE);
+        board[0][0] = whiteLeft;
+        Rook whiteRight = new Rook(new Position(0,7), Color.WHITE);
+        board[0][7] = whiteRight;
+        Rook blackLeft = new Rook(new Position(7,0), Color.BLACK);
+        board[7][0] = blackLeft;
+        Rook blackRight = new Rook(new Position(7,7), Color.BLACK);
+        board[7][7] = blackRight;
+    }
+
+    private void createAndAddBishops() {
+        Bishop whiteLeft = new Bishop(new Position(0,2), Color.WHITE);
+        board[0][2] = whiteLeft;
+        Bishop whiteRight = new Bishop(new Position(0,5), Color.WHITE);
+        board[0][5] = whiteRight;
+        Bishop blackLeft = new Bishop(new Position(7,2), Color.BLACK);
+        board[7][2] = blackLeft;
+        Bishop blackRight = new Bishop(new Position(7,5), Color.BLACK);
+        board[7][5] = blackRight;
+    }
+
+    private void createAndAddKnights() {
+        Knight whiteLeft = new Knight(new Position(0,1), Color.WHITE);
+        board[0][1] = whiteLeft;
+        Knight whiteRight = new Knight(new Position(0,6), Color.WHITE);
+        board[0][6] = whiteRight;
+        Knight blackLeft = new Knight(new Position(7,1), Color.BLACK);
+        board[7][1] = blackLeft;
+        Knight blackRight = new Knight(new Position(7,6), Color.BLACK);
+        board[7][6] = blackRight;
     }
 
     private String createEmptyBlock(Color color) {
